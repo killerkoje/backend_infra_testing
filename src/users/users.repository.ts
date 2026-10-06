@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from './user.entity';
 
-export type NewUser = Omit<UserEntity, 'id'>;
+export type NewUser = Pick<UserEntity, 'email' | 'name'>;
 
 @Injectable()
 export class UsersRepository {

@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { GenerationRequestEntity } from '../generation-requests/generation-request.entity';
 
 @Entity('users')
 export class UserEntity {
@@ -10,4 +17,10 @@ export class UserEntity {
 
   @Column({ type: 'varchar', length: 100 })
   name!: string;
+
+  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+  createdAt!: Date;
+
+  @OneToMany(() => GenerationRequestEntity, (request) => request.user)
+  generationRequests!: GenerationRequestEntity[];
 }

@@ -3,6 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { QueryFailedError } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserEntity } from './user.entity';
 import { UsersRepository } from './users.repository';
@@ -22,10 +23,18 @@ export class UsersService {
       throw new ConflictException('Email is already in use.');
     }
 
-    return await this.usersRepository.save({
-      email: createUserDto.email,
-      name: createUserDto.name,
-    });
+    try {
+      return await this.usersRepository.save({
+        email: createUserDto.email,
+        name: createUserDto.name,
+      });
+    } catch (error: unknown) {
+      if (this.isUniqueViolation(error)) {
+        throw new ConflictException('Email is already in use.');
+      }
+
+      throw error;
+    }
   }
 
   async findOne(id: number): Promise<UserEntity> {
@@ -38,5 +47,14 @@ export class UsersService {
     }
 
     return user;
+  }
+
+  private isUniqueViolation(error: unknown): boolean {
+    if (!(error instanceof QueryFailedError)) {
+      return false;
+    }
+
+    const driverError = error.driverError as { code?: string };
+    return driverError.code === '23505';
   }
 }

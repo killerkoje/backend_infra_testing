@@ -1,25 +1,24 @@
-# 백엔드·DB 학습 노트
+# AI 백엔드·인프라 학습 노트
 
 이 폴더는 `ai_backend_infra_learning_roadmap.md`를 따라 실습하면서 이해한 내용을 주제별로 정리한다.
 
-## 문서 목록
+## 주제별 폴더
 
-1. [백엔드 요청 흐름](./01-backend-request-flow.md)
-   - Module, Controller, Service
-   - 의존성 주입과 생성자
-   - HTTP 요청부터 응답까지의 실행 순서
+### [Backend](./backend/README.md)
 
-2. [데이터 계층](./02-data-layers.md)
-   - DTO, Service, Repository, Entity, TypeORM
-   - 각 계층의 역할과 데이터 전달 과정
+- [백엔드 요청 흐름](./backend/01-request-flow.md)
+- [DTO·Service·Repository·Entity·TypeORM](./backend/02-data-layers.md)
+- [비동기와 성능](./backend/03-async-and-performance.md)
+- [Queue·Worker·ACK](./backend/04-queue-worker-ack.md)
 
-3. [DB 핵심 개념](./03-database-core.md)
-   - 제약조건, 트랜잭션, 동시성
-   - 일반·복합·부분·표현식 Index
+### [Database](./database/README.md)
 
-4. [비동기와 성능](./04-async-and-performance.md)
-   - Promise, async, await
-   - Promise.all, Redis, React Query
+- [DB 핵심 개념](./database/01-database-core.md)
+- [Transaction·Lock·Deadlock·Isolation](./database/02-transaction-lock-isolation.md)
+
+### [Infra](./infra/README.md)
+
+아직 인프라 단계 전이므로 폴더와 향후 학습 목차만 준비한다.
 
 ## 현재 프로젝트 실행 구조
 

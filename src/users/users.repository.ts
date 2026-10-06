@@ -22,6 +22,19 @@ export class UsersRepository {
     return this.repository.findOne({ where: { email } });
   }
 
+  findWithGenerationHistory(id: number): Promise<UserEntity | null> {
+    console.log(`[UsersRepository] findWithGenerationHistory(${id})`);
+
+    return this.repository
+      .createQueryBuilder('user')
+      .leftJoinAndSelect('user.generationRequests', 'generationRequest')
+      .leftJoinAndSelect('generationRequest.results', 'generationResult')
+      .where('user.id = :id', { id })
+      .orderBy('generationRequest.createdAt', 'DESC')
+      .addOrderBy('generationResult.createdAt', 'ASC')
+      .getOne();
+  }
+
   save(newUser: NewUser): Promise<UserEntity> {
     console.log('[UsersRepository] save');
 

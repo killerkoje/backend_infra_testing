@@ -49,6 +49,18 @@ export class UsersService {
     return user;
   }
 
+  async findGenerationHistory(id: number): Promise<UserEntity> {
+    console.log(`[UsersService] findGenerationHistory(${id})`);
+
+    const user = await this.usersRepository.findWithGenerationHistory(id);
+
+    if (!user) {
+      throw new NotFoundException(`User with id ${id} was not found.`);
+    }
+
+    return user;
+  }
+
   private isUniqueViolation(error: unknown): boolean {
     if (!(error instanceof QueryFailedError)) {
       return false;

@@ -12,6 +12,14 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @Get(':id/generation-requests')
+  findGenerationHistory(@Param('id', ParseIntPipe) id: number) {
+    console.log(
+      `[UsersController] GET /users/${id}/generation-requests`,
+    );
+    return this.usersService.findGenerationHistory(id);
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     console.log(`[UsersController] GET /users/${id}`);

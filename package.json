@@ -10,7 +10,9 @@
     "migration:run": "npm run build && typeorm -d dist/database/data-source.js migration:run",
     "migration:revert": "npm run build && typeorm -d dist/database/data-source.js migration:revert",
     "migration:show": "npm run build && typeorm -d dist/database/data-source.js migration:show",
-    "test:concurrency": "node scripts/concurrent-user-test.mjs"
+    "test:concurrency": "node scripts/concurrent-user-test.mjs",
+    "test:concurrent-completion": "node scripts/concurrent-completion-test.mjs",
+    "test:transaction-rollback": "npm run build && node scripts/verify-transaction-rollback.cjs"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.0",

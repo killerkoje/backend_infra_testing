@@ -1,6 +1,6 @@
 # Backend 학습 노트
 
-NestJS 요청 흐름과 애플리케이션 계층, 비동기 처리, Queue 기반 작업 처리 내용을 정리한다.
+NestJS 요청 흐름과 애플리케이션 계층, 비동기 처리, Queue 기반 작업 처리, HTTP와 WebSocket 통신을 정리한다.
 
 ## 문서
 
@@ -21,3 +21,8 @@ NestJS 요청 흐름과 애플리케이션 계층, 비동기 처리, Queue 기�
    - 비동기 Job 처리
    - ACK와 재전달
    - 중복 실행과 멱등성
+
+5. [HTTP와 WebSocket](./05-http-and-websocket.md)
+   - 요청·응답과 지속 연결의 차이
+   - HTTP Upgrade Handshake
+   - WebSocket 연결과 Reverse Proxy

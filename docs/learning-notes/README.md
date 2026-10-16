@@ -27,6 +27,7 @@
 - [Linux 실행 환경](./infra/01-linux-runtime.md)
 - [Network·HTTP·WebSocket](./infra/02-network-http-websocket.md)
 - [Reverse Proxy·Nginx·TLS](./infra/03-reverse-proxy-tls.md)
+- [Minikube·Pod·Deployment·Service](./infra/04-minikube-kubernetes-core.md)
 
 ## 현재 학습 진도
 
@@ -36,9 +37,9 @@ PostgreSQL / DB 설계            완료
 TypeORM                         완료
 Transaction / Lock / 동시성     완료
 Docker                          완료
-Linux / Network                 Reverse Proxy까지 학습
-실제 서버 배포                  다음 단계
-K3s / Kubernetes               예정
+Linux / Network                 Reverse Proxy·TLS까지 학습
+Minikube / Kubernetes           Pod·Deployment·Service 실습 중
+실제 서버 배포                  예정
 Observability / 장애 대응       예정
 ```
 

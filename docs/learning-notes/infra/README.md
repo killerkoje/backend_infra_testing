@@ -18,6 +18,12 @@
    - WebSocket Proxy 설정
    - TLS Termination과 Forwarded Header
 
+4. [Minikube·Pod·Deployment·Service](./04-minikube-kubernetes-core.md)
+   - Windows Minikube와 Linux Node
+   - Pod와 kubectl port-forward
+   - Service·Label·EndpointSlice
+   - Deployment·ReplicaSet·Pod 자동 복구
+
 ## 현재 위치
 
 ```text
@@ -25,9 +31,11 @@ Docker
 → Linux Process·Port·환경변수
 → Network·DNS·TCP·HTTP
 → WebSocket
-→ Reverse Proxy·TLS       ← 현재 학습 범위
-→ 실제 서버 배포          ← 다음 단계
-→ K3s / Kubernetes
+→ Reverse Proxy·TLS
+→ Minikube / Kubernetes   ← 현재 학습 범위
+   └── Pod·Deployment·Service
+→ Ingress·ConfigMap·Secret ← 다음 단계
+→ 실제 서버 배포
 → Cloudflare Tunnel
 → Observability
 → 장애 대응

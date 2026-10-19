@@ -17,6 +17,10 @@
 - [DB 핵심 개념](./database/01-database-core.md)
 - [Transaction·Lock·Deadlock·Isolation](./database/02-transaction-lock-isolation.md)
 
+### [Software Design](./design/README.md)
+
+- [DDD와 ERD: 백엔드 설계 개념](./design/01-ddd-erd-backend-design.md)
+
 ### [Docker](./docker/README.md)
 
 - [Docker 핵심 개념](./docker/01-docker-core.md)

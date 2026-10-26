@@ -1,0 +1,13 @@
+node_modules
+dist
+.git
+.gitignore
+.env
+.env.*
+.kube
+kubectl.exe
+kubectl.exe.sha256
+docs
+k8s
+scripts
+*.log

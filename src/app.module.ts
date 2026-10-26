@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { GenerationRequestEntity } from './generation-requests/generation-request.entity';
 import { GenerationRequestsModule } from './generation-requests/generation-requests.module';
 import { GenerationResultEntity } from './generation-results/generation-result.entity';
+import { HealthModule } from './health/health.module';
 import { UserEntity } from './users/user.entity';
 import { UsersModule } from './users/users.module';
 
@@ -19,6 +20,7 @@ import { UsersModule } from './users/users.module';
       synchronize: false,
       logging: ['query', 'error'],
     }),
+    HealthModule,
     UsersModule,
     GenerationRequestsModule,
   ],

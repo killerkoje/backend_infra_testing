@@ -2,4 +2,8 @@ node_modules/
 dist/
 .env
 *.log
+.kube/
+/kubectl.exe
+/kubectl.exe.sha256
+/backend-image.tar
 

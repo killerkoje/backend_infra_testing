@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>쿠버네티스 구조 지도</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root {
+    --bg: #faf9fc;
+    --surface: #ffffff;
+    --ink: #211f2b;
+    --ink-2: #5d5a6b;
+    --ink-3: #8b8799;
+    --hair: #e4e1ed;
+    --accent: #6b5ddb;
+    --accent-soft: #efedff;
+
+    /* 다이어그램 시트는 두 테마 모두 흰 종이로 고정한다.
+       mermaid 노드 fill이 밝은 색으로 하드코딩돼 있어 배경이 어두워지면 글자가 묻힌다. */
+    --paper: #ffffff;
+    --paper-hair: #ddd9e8;
+
+    --step--1: 0.8125rem;
+    --step-0: 1rem;
+    --step-1: 1.1875rem;
+    --step-2: 2.125rem;
+    --step-3: 2.875rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141219;
+      --surface: #1b1922;
+      --ink: #ece9f4;
+      --ink-2: #a9a4ba;
+      --ink-3: #807b91;
+      --hair: #2b2834;
+      --accent: #a99cff;
+      --accent-soft: #24203a;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #141219;
+    --surface: #1b1922;
+    --ink: #ece9f4;
+    --ink-2: #a9a4ba;
+    --ink-3: #807b91;
+    --hair: #2b2834;
+    --accent: #a99cff;
+    --accent-soft: #24203a;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans KR", system-ui, -apple-system, "Malgun Gothic", sans-serif;
+    font-size: var(--step-0);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1020px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 5rem) clamp(1.25rem, 4vw, 2.5rem) 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+
+  header { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: var(--step--1);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0;
+  }
+
+  .eyebrow::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: var(--hair);
+  }
+
+  h1 {
+    font-family: "Gowun Batang", "Apple SD Gothic Neo", serif;
+    font-weight: 700;
+    font-size: clamp(var(--step-2), 5vw, var(--step-3));
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .lede {
+    margin: 0;
+    max-width: 58ch;
+    color: var(--ink-2);
+    font-size: var(--step-1);
+  }
+
+  figure {
+    margin: 0;
+    background: var(--paper);
+    border: 1px solid var(--paper-hair);
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(20, 18, 25, 0.06), 0 12px 32px -18px rgba(20, 18, 25, 0.35);
+    overflow: hidden;
+  }
+
+  .sheet-bar {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 1.1rem;
+    border-bottom: 1px solid var(--paper-hair);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: #6f6b80;
+    background: #fcfbfe;
+  }
+
+  .sheet-bar span:last-child { color: #a09cb0; }
+
+  .sheet-body {
+    overflow-x: auto;
+    padding: clamp(1rem, 3vw, 2rem) 1rem;
+  }
+
+  pre.mermaid {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    min-width: min-content;
+    background: transparent;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    color: #8b8799;
+    white-space: pre;
+  }
+
+  pre.mermaid svg { max-width: 100%; height: auto; }
+
+  figcaption {
+    padding: 0.85rem 1.1rem;
+    border-top: 1px solid var(--paper-hair);
+    font-size: var(--step--1);
+    line-height: 1.6;
+    color: #6f6b80;
+    background: #fcfbfe;
+  }
+
+  .path {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.65rem;
+    padding: 1.1rem 1.25rem;
+    border: 1px solid var(--hair);
+    border-left: 2px solid var(--accent);
+    border-radius: 2px;
+    background: var(--surface);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: var(--step--1);
+  }
+
+  .path .k { color: var(--ink); }
+  .path .sep { color: var(--ink-3); }
+  .path .note {
+    color: var(--ink-3);
+    width: 100%;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
+
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.9rem;
+    align-items: baseline;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--hair);
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.75rem;
+    color: var(--ink-3);
+  }
+
+  footer code {
+    font-family: inherit;
+    color: var(--ink-2);
+    background: var(--accent-soft);
+    padding: 0.15em 0.45em;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">infra 학습 노트 / K8S</p>
+    <h1>쿠버네티스 구조 지도</h1>
+    <p class="lede">클러스터 안에서 컨트롤 플레인이 파드를 배정하고, 워커 노드의 쿠블렛이 그 파드를 실제로 띄워 백엔드 컨테이너를 실행하기까지의 계층.</p>
+  </header>
+
+  <figure>
+    <div class="sheet-bar">
+      <span>K8S-ARCHITECTURE</span>
+      <span>flowchart TB</span>
+    </div>
+    <div class="sheet-body">
+<pre class="mermaid">
+%%{init: {"theme":"base","themeVariables":{"fontFamily":"IBM Plex Sans KR, Malgun Gothic, sans-serif","fontSize":"14px","lineColor":"#8a86a0","textColor":"#2a2833","edgeLabelBackground":"#ffffff","nodeTextColor":"#2a2833"}}}%%
+flowchart TB
+    subgraph K8S["쿠버네티스 (K8S) 시스템 전체"]
+        subgraph Cluster["클러스터 (Cluster) · 여러 노드를 하나로 묶어 관리하는 K8S 환경"]
+            CP["컨트롤 플레인 (Control Plane)&lt;br/&gt;―――――――――&lt;br/&gt;파드 배치 결정&lt;br/&gt;상태 관리 · 스케줄링"]
+
+            subgraph Worker["워커 노드 (Worker Node) · 실제 애플리케이션이 실행되는 서버"]
+                direction LR
+                Kubelet["쿠블렛 (Kubelet)&lt;br/&gt;―――――――――&lt;br/&gt;노드에서 파드가&lt;br/&gt;정상 실행되도록 관리"]
+
+                subgraph Pod["파드 (Pod) · 컨테이너를 실행하는 K8S의 최소 배포 단위"]
+                    Container["컨테이너 (Container)&lt;br/&gt;―――――――――&lt;br/&gt;FastAPI · Spring Boot 등&lt;br/&gt;실제 백엔드 실행 환경"]
+                end
+
+                Kubelet --&gt;|실행 · 상태 감시| Pod
+            end
+
+            CP --&gt;|파드 배정| Worker
+        end
+    end
+
+    style K8S fill:#fbfbfd,stroke:#dddddd,color:#555555
+    style Cluster fill:#f6f7fb,stroke:#c5c9da,color:#444a5c
+    style CP fill:#eeeeff,stroke:#7265dc,color:#37308c
+    style Worker fill:#e0f5ed,stroke:#25846c,color:#075b47
+    style Kubelet fill:#ffffff,stroke:#bbbbbb,color:#222222
+    style Pod fill:#ffffff,stroke:#bbbbbb,color:#222222
+    style Container fill:#f3f1eb,stroke:#999999,color:#333333
+</pre>
+    </div>
+    <figcaption>바깥에서 안으로 갈수록 범위가 좁아진다. 클러스터는 노드의 묶음, 노드는 파드가 도는 서버, 파드는 컨테이너를 감싸는 최소 배포 단위다.</figcaption>
+  </figure>
+
+  <div class="path">
+    <span class="note">지시가 흐르는 순서</span>
+    <span class="k">컨트롤 플레인</span><span class="sep">→</span>
+    <span class="k">워커 노드</span><span class="sep">→</span>
+    <span class="k">쿠블렛</span><span class="sep">→</span>
+    <span class="k">파드</span><span class="sep">→</span>
+    <span class="k">컨테이너</span>
+  </div>
+
+  <footer>
+    <span>backend_infra_testing</span>
+    <code>docs/learning-notes/infra/K8S-architecture.html</code>
+  </footer>
+</div>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true, securityLevel: "loose" });
+</script>
+
+</body>
+</html>

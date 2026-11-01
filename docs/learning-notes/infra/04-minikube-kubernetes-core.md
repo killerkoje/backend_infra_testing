@@ -442,7 +442,7 @@ nginx-service
 └── Endpoint 10.244.0.6:80
 ```
 
-현재까지는 명령형 명령으로 Resource를 생성했다. 다음 단계에서는 같은 구성을 YAML로 선언해 `kubectl apply`하고, ConfigMap·Secret·Ingress로 확장한다.
+현재까지는 명령형 명령으로 Resource를 생성했다. 이후 실습에서는 같은 구성을 YAML로 선언해 `kubectl apply`하고 ConfigMap·Secret·Ingress, Probe, Rolling Update와 Graceful Shutdown까지 확장했다. 자세한 내용은 [Kubernetes 설정·Probe·Rolling Update·종료](./05-kubernetes-config-rollout-lifecycle.md)에 정리한다.
 
 ## 현재까지 사용한 확인 명령
 

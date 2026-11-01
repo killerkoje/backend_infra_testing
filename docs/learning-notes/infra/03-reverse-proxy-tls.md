@@ -137,6 +137,56 @@ Backend는 Application 처리에 집중
 
 NestJS가 내부에서 HTTP 요청을 받더라도 `X-Forwarded-Proto: https`를 통해 원래 Client가 HTTPS로 접속했음을 알 수 있다. 다만 Application에서 Proxy를 신뢰하도록 명시적으로 설정하고, 신뢰할 Proxy 범위를 제한해야 한다.
 
+## Minikube Ingress TLS 실습
+
+현재 학습 Cluster에서는 `backend.local`용 자체 서명 인증서를 Kubernetes TLS Secret으로 저장하고 Ingress Controller에서 TLS를 종료한다.
+
+```text
+Client
+→ HTTPS :443
+→ ingress-nginx-controller
+→ TLS Secret: backend-local-tls
+→ HTTP
+→ backend-service:3000
+→ Backend Pod
+```
+
+Ingress의 핵심 설정:
+
+```yaml
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  tls:
+    - hosts:
+        - backend.local
+      secretName: backend-local-tls
+```
+
+`backend-local-tls` Secret에는 다음 Key가 들어간다.
+
+```text
+tls.crt → 공개 인증서
+tls.key → 개인키
+```
+
+자체 서명 인증서는 공인 CA가 서명하지 않았으므로 Browser와 `curl`이 기본적으로 신뢰하지 않는다. 로컬 검증에서 `curl -k`를 사용할 수 있지만, 이는 인증서 검증을 생략하므로 운영 환경에서는 사용하지 않는다.
+
+운영 환경에서는 일반적으로 cert-manager와 Let's Encrypt 같은 CA를 사용해 인증서 발급과 갱신을 자동화한다. 개인키나 실제 인증서 값을 Git에 Commit하지 않는다.
+
+검증 흐름:
+
+```text
+HTTP 요청
+→ HTTPS로 Redirect
+
+HTTPS 요청
+→ Ingress Controller가 TLS Handshake 처리
+→ Backend의 /health/live
+→ 200 OK
+```
+
 ## 외부 공개 원칙
 
 ```text

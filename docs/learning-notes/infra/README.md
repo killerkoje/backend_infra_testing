@@ -24,6 +24,12 @@
    - Service·Label·EndpointSlice
    - Deployment·ReplicaSet·Pod 자동 복구
 
+5. [Kubernetes 설정·Probe·Rolling Update·종료](./05-kubernetes-config-rollout-lifecycle.md)
+   - ConfigMap·Secret 반영 시점
+   - CNI와 Pod Network 생성·정리
+   - Readiness·Liveness와 Endpoint 전환
+   - 무중단 Rolling Update와 Graceful Shutdown
+
 ## 현재 위치
 
 ```text
@@ -32,10 +38,9 @@ Docker
 → Network·DNS·TCP·HTTP
 → WebSocket
 → Reverse Proxy·TLS
-→ Minikube / Kubernetes   ← 현재 학습 범위
-   └── Pod·Deployment·Service
-→ Ingress·ConfigMap·Secret ← 다음 단계
-→ 실제 서버 배포
+→ Minikube / Kubernetes
+   └── Pod·Deployment·Service·Ingress·ConfigMap·Secret·Probe·Rolling Update 완료
+→ K3s 실제 서버 배포       ← 다음 단계
 → Cloudflare Tunnel
 → Observability
 → 장애 대응

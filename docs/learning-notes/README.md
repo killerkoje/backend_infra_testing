@@ -32,3 +32,4 @@
 - [Network·HTTP·WebSocket](./infra/02-network-http-websocket.md)
 - [Reverse Proxy·Nginx·TLS](./infra/03-reverse-proxy-tls.md)
 - [Minikube·Pod·Deployment·Service](./infra/04-minikube-kubernetes-core.md)
+- [Kubernetes 설정·Probe·Rolling Update·종료](./infra/05-kubernetes-config-rollout-lifecycle.md)

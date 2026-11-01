@@ -32,6 +32,7 @@ NestJS, PostgreSQL, Docker, Kubernetes를 직접 구성하고 장애 상황을 �
 - [Network·HTTP·WebSocket](./docs/learning-notes/infra/02-network-http-websocket.md)
 - [Reverse Proxy·Nginx·TLS](./docs/learning-notes/infra/03-reverse-proxy-tls.md)
 - [Minikube·Pod·Deployment·Service](./docs/learning-notes/infra/04-minikube-kubernetes-core.md)
+- [Kubernetes 설정·Probe·Rolling Update·종료](./docs/learning-notes/infra/05-kubernetes-config-rollout-lifecycle.md)
 
 ## 현재 학습 진도
 
@@ -42,8 +43,8 @@ TypeORM                         완료
 Transaction / Lock / 동시성     완료
 Docker                          완료
 Linux / Network                 Reverse Proxy·TLS까지 학습
-Minikube / Kubernetes           PVC·Probe·Resources·HPA·Ingress까지 실습
-실제 서버 배포                  예정
+Minikube / Kubernetes           TLS·설정 반영·Rolling Update·Graceful Shutdown까지 검증
+K3s 실제 서버 배포              다음 단계
 Observability / 장애 대응       예정
 ```
 
@@ -522,4 +523,5 @@ Metrics Server
 - `--kubelet-insecure-tls`는 로컬 Minikube 실습에만 사용한다.
 - PostgreSQL replicas를 단순히 늘려 같은 RWO PVC에 연결하지 않는다.
 - HPA가 적용된 Deployment의 replicas를 사람이 바꿔도 HPA가 다시 덮어쓸 수 있다.
-- 다음 단계는 Windows→Ingress 진입 경로, TLS, ConfigMap·Secret 갱신, Observability다.
+- Ingress TLS, ConfigMap·Secret 갱신 시점, Rolling Update와 Graceful Shutdown 검증을 완료했다.
+- 다음 단계는 동일한 Resource를 실제 K3s 서버에 배포하고 Domain·방화벽·공인 TLS·Image Registry·Backup을 연결하는 것이다.

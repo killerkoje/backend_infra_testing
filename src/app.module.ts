@@ -6,8 +6,10 @@ import { GenerationResultEntity } from './generation-results/generation-result.e
 import { HealthModule } from './health/health.module';
 import { UserEntity } from './users/user.entity';
 import { UsersModule } from './users/users.module';
+import { VersionController } from './version/version.controller';
 
 @Module({
+  controllers: [VersionController],
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',

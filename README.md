@@ -33,6 +33,10 @@ NestJS, PostgreSQL, Docker, Kubernetes를 직접 구성하고 장애 상황을 �
 - [Reverse Proxy·Nginx·TLS](./docs/learning-notes/infra/03-reverse-proxy-tls.md)
 - [Minikube·Pod·Deployment·Service](./docs/learning-notes/infra/04-minikube-kubernetes-core.md)
 - [Kubernetes 설정·Probe·Rolling Update·종료](./docs/learning-notes/infra/05-kubernetes-config-rollout-lifecycle.md)
+- [Kubernetes 전체 숲: Mermaid 구조도](./docs/learning-notes/infra/06-kubernetes-big-picture.md)
+- [새 이미지 배포와 롤백](./docs/learning-notes/infra/07-image-deploy-rollback.md)
+- [Mac·K3s 실습 전체 기록](./docs/learning-notes/infra/08-macos-k3s-lab.md)
+- [Mac 실행 환경](./LOCAL-SETUP.md) / [K3s 재현·시작·종료](./infra/local-server/README.md)
 
 ## 현재 학습 진도
 
@@ -44,8 +48,14 @@ Transaction / Lock / 동시성     완료
 Docker                          완료
 Linux / Network                 Reverse Proxy·TLS까지 학습
 Minikube / Kubernetes           TLS·설정 반영·Rolling Update·Graceful Shutdown까지 검증
-K3s 실제 서버 배포              다음 단계
-Observability / 장애 대응       예정
+Mac Ubuntu VM / K3s 배포        완료 (단일 노드)
+Service / EndpointSlice         Pod 교체 후 대상 IP 자동 갱신 확인
+DB 장애 / Probe                 Readiness 제외·재시작 없이 복구 확인
+HPA                            CPU 부하로 Pod 1 → 3 → 1 검증
+Ingress / 외부 공개             Traefik 규칙·Cloudflare HTTPS 터널 검증
+새 이미지 / Rollback             v2 배포·이전 이미지 롤백·v2 복원 검증
+Image Registry / CI/CD          다음 단계
+Backup / Observability          예정 (기본 로그·이벤트 조회 실습 완료)
 ```
 
 ## 현재 프로젝트 실행 구조
@@ -72,9 +82,55 @@ PostgreSQL       → 5433
 
 ---
 
-# Kubernetes 통합 실습 기록
+# 현재 Mac·K3s 실습 구성
 
-## 최종 구성
+2026-11-15 실습 기준. Mac 안의 Ubuntu VM에 K3s를 설치했다.
+별도 클라우드 서버 배포나 공유기 포트 개방은 하지 않았다.
+
+```text
+외부 사용자 → Cloudflare HTTPS 터널 → Mac 127.0.0.1:8082
+→ Lima Ubuntu VM:80 → Traefik (Ingress Controller)
+→ backend-service의 준비된 Pod → postgres-service → PostgreSQL Pod → PVC/PV
+```
+
+- VM: `backend-k3s`, CPU 4개·메모리 4GiB·가상 디스크 30GiB.
+- Node: `lima-backend-k3s`, Control Plane과 앱 실행 역할을 함께 수행.
+- Namespace: `backend-learning`, 이미지: `backend-infra-testing:version-v2`.
+- API: `/health/live`, `/health/ready`, `/version` (`{"version":"v2"}`).
+- HPA: CPU request 대비 평균 50%, 최소 1개·최대 3개.
+- PostgreSQL: 새 학습 DB `study`, `local-path` PVC 1Gi, 무작위 비밀번호 Secret.
+- 설정: [`infra/local-server`](./infra/local-server/README.md).
+
+Service는 Pod IP를 고정하지 않는다. 라벨로 대상을 선택하고 EndpointSlice를 갱신한다.
+Ingress는 라우팅 규칙이고, Traefik이 실제 HTTP 요청을 받아 프록시한다.
+외부 HTTPS는 Cloudflare에서 처리하며 터널의 로컬 원본은 HTTP다.
+K3s에 별도 공인 인증서와 고정 도메인을 설치한 구성은 아니다.
+
+## 완료한 실습
+
+| 주제 | 확인한 결과 |
+|---|---|
+| Linux 셸·프로세스 | `uname`, `whoami`, `pwd`, `ls`, `ps`, 셸 종료 후 백엔드 유지 |
+| Deployment·ReplicaSet | Pod 삭제 후 새 이름의 Pod 자동 생성 |
+| Service·EndpointSlice | Service IP 유지, 대상 Pod IP `10.42.0.13 → 10.42.0.14` 갱신 |
+| Probe·DB 장애 | DB 0개 → 백엔드 Running·Ready 0/1·재시작 0 → DB 복구 후 Ready 1/1 |
+| PVC | `postgres-data` Bound, Pod 교체 후 같은 저장 공간 연결 |
+| Rolling Update | 새 Pod Ready 이후 기존 Pod 종료 |
+| Rollback | 이전 설정 재적용 시 새 revision 생성 |
+| HPA | CPU 부하로 Pod 3개·Endpoint 3개, 부하 종료 후 1개로 축소 |
+| 로그·이벤트 | Readiness의 `SELECT 1`, Deployment Events, HPA Conditions 해석 |
+| 새 이미지 배포 | `/version` 404 → v2 200 → 롤백 404 → 최종 v2 200 |
+
+세부 명령과 개념은 [Mac·K3s 실습 기록](./docs/learning-notes/infra/08-macos-k3s-lab.md)에 정리했다.
+IP·Pod 이름·revision은 관찰 당시 값이며 재배포하면 달라질 수 있다.
+
+---
+
+# 이전 Windows·Minikube 통합 실습 기록
+
+아래는 이전 환경의 기록이다. 현재 Mac K3s 설정과 Node 이름·포트·HPA 최대 개수가 다르다.
+
+## 당시 구성
 
 이번 실습에서는 Minikube에 NestJS와 PostgreSQL을 배포하고 다음 흐름을 구성했다.
 
@@ -524,4 +580,4 @@ Metrics Server
 - PostgreSQL replicas를 단순히 늘려 같은 RWO PVC에 연결하지 않는다.
 - HPA가 적용된 Deployment의 replicas를 사람이 바꿔도 HPA가 다시 덮어쓸 수 있다.
 - Ingress TLS, ConfigMap·Secret 갱신 시점, Rolling Update와 Graceful Shutdown 검증을 완료했다.
-- 다음 단계는 동일한 Resource를 실제 K3s 서버에 배포하고 Domain·방화벽·공인 TLS·Image Registry·Backup을 연결하는 것이다.
+- 후속 Mac 실습에서 Ubuntu VM의 K3s 배포와 Cloudflare 터널 공개를 완료했다. 다음 단계는 Image Registry·CI/CD·DB Backup·Observability이며, 별도 서버의 Domain·방화벽·공인 TLS 구성은 별도 후속 과제다.

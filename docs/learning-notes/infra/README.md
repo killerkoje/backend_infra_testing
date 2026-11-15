@@ -30,6 +30,19 @@
    - Readiness·Liveness와 Endpoint 전환
    - 무중단 Rolling Update와 Graceful Shutdown
 
+6. [Kubernetes 전체 구조와 현재 K3s 실습 환경](./06-kubernetes-big-picture.md)
+   - Cluster·Control Plane·Node·Pod·Container의 큰 관계도
+   - Scheduler의 Node 선택과 Node 내부 실행 흐름
+
+7. [새 이미지 배포와 롤백 실습](./07-image-deploy-rollback.md)
+   - 새 이미지 빌드·K3s 전달·배포
+   - 외부 응답 확인과 이전 이미지 롤백
+
+8. [Mac·K3s 실습 전체 기록](./08-macos-k3s-lab.md)
+   - Linux·Pod 자동 복구·Service·EndpointSlice
+   - Probe·DB 복구·PVC·Rolling Update·HPA
+   - Ingress·Traefik·터널·로그·명령어 복습
+
 ## 현재 위치
 
 ```text
@@ -40,8 +53,11 @@ Docker
 → Reverse Proxy·TLS
 → Minikube / Kubernetes
    └── Pod·Deployment·Service·Ingress·ConfigMap·Secret·Probe·Rolling Update 완료
-→ K3s 실제 서버 배포       ← 다음 단계
-→ Cloudflare Tunnel
-→ Observability
-→ 장애 대응
+→ Mac Ubuntu VM / K3s 배포 완료
+→ Cloudflare HTTPS Tunnel 공개 완료
+→ Pod 자동 복구·DB 장애 복구·HPA 1→3→1 검증 완료
+→ 새 이미지 배포·롤백 완료
+→ Image Registry / CI/CD   ← 다음 단계
+→ DB 백업·복구
+→ Observability / 장애 대응 심화
 ```

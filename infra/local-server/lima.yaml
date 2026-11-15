@@ -1,0 +1,28 @@
+minimumLimaVersion: 2.0.0
+base: template:_images/ubuntu-24.04
+vmType: vz
+cpus: 4
+memory: 4GiB
+disk: 30GiB
+mounts: []
+containerd:
+  system: false
+  user: false
+portForwards:
+  - guestPort: 80
+    hostPort: 8082
+    hostIP: 127.0.0.1
+provision:
+  - mode: system
+    script: |
+      #!/bin/sh
+      set -eu
+      if ! command -v k3s >/dev/null 2>&1; then
+        curl -fsSL https://get.k3s.io -o /tmp/install-k3s.sh
+        INSTALL_K3S_CHANNEL=stable sh /tmp/install-k3s.sh
+      fi
+probes:
+  - script: |
+      #!/bin/sh
+      sudo k3s kubectl get nodes
+    hint: "K3s is starting; check sudo journalctl -u k3s inside the VM."

@@ -33,3 +33,7 @@
 - [Reverse Proxy·Nginx·TLS](./infra/03-reverse-proxy-tls.md)
 - [Minikube·Pod·Deployment·Service](./infra/04-minikube-kubernetes-core.md)
 - [Kubernetes 설정·Probe·Rolling Update·종료](./infra/05-kubernetes-config-rollout-lifecycle.md)
+
+- [Kubernetes 전체 숲: Mermaid 구조도](./infra/06-kubernetes-big-picture.md)
+- [새 이미지 배포와 롤백](./infra/07-image-deploy-rollback.md)
+- [Mac·K3s 실습 전체 기록](./infra/08-macos-k3s-lab.md)

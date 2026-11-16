@@ -2,6 +2,10 @@
 
 NestJS, PostgreSQL, Docker, Kubernetes를 직접 구성하고 장애 상황을 검증하면서 기록한 백엔드·인프라 학습 저장소다.
 
+## 다음 학습 이어가기
+
+**[LEARNING-NEXT.md](./LEARNING-NEXT.md)를 먼저 읽는다.** 현재 체크포인트, GHCR·CI/CD 단계별 계획, 완료 기준과 다음 명령을 정리했다. 다음 단계는 Mac에서 로컬 이미지 목록을 확인하는 R1이며, GHCR 업로드와 CI/CD는 아직 시작하지 않았다.
+
 ## 주제별 폴더
 
 ### Backend

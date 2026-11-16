@@ -43,6 +43,11 @@
    - Probe·DB 복구·PVC·Rolling Update·HPA
    - Ingress·Traefik·터널·로그·명령어 복습
 
+## 다음 세션 시작점
+
+[GHCR → CI → CD 세부 계획과 진행 기록](../../../LEARNING-NEXT.md)을 먼저 확인한다.
+각 단계는 직접 실행한 결과를 확인한 후 다음으로 진행한다.
+
 ## 현재 위치
 
 ```text

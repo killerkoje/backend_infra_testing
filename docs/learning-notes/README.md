@@ -2,6 +2,8 @@
 
 통합 학습 기록은 저장소 최상위 [`README.md`](../../README.md)에서 관리한다.
 
+다음 학습 재개: [GHCR·CI/CD 단계별 계획](../../LEARNING-NEXT.md).
+
 ## 세부 문서
 
 ### Backend

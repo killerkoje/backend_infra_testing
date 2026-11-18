@@ -7,5 +7,20 @@ steps:
     entrypoint: npm
     args: ["run", "build"]
 
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - asia-northeast3-docker.pkg.dev/mineral-brand-515105-e3/backend-images/backend-infra-testing:$SHORT_SHA
+      - .
+
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - asia-northeast3-docker.pkg.dev/mineral-brand-515105-e3/backend-images/backend-infra-testing:$SHORT_SHA
+
+images:
+  - asia-northeast3-docker.pkg.dev/mineral-brand-515105-e3/backend-images/backend-infra-testing:$SHORT_SHA
+
 options:
   logging: CLOUD_LOGGING_ONLY

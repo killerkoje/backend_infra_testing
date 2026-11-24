@@ -21,5 +21,16 @@ steps:
       - asia-northeast3-docker.pkg.dev/mineral-brand-515105-e3/backend-images/backend-infra-testing:$SHORT_SHA
       - ./demo
 
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - hello
+      - --image=asia-northeast3-docker.pkg.dev/mineral-brand-515105-e3/backend-images/backend-infra-testing:$SHORT_SHA
+      - --region=asia-northeast3
+      - --project=mineral-brand-515105-e3
+      - --quiet
+
 options:
   logging: CLOUD_LOGGING_ONLY

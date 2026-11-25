@@ -41,6 +41,8 @@ steps:
 
   - name: node:22-alpine
     id: check-id-token
+    env:
+      - SMOKE_TAG=smoke-$SHORT_SHA
     entrypoint: node
     args:
       - --input-type=module
@@ -64,6 +66,22 @@ steps:
         const token = await res.text();
         if (!token.trim()) throw Error('No token');
         console.log('ID token OK');
+
+        const tag = process.env.SMOKE_TAG;
+        if (!tag || !/^smoke-[a-f0-9]+$/.test(tag)) {
+          throw Error('Invalid smoke test tag');
+        }
+        const target = new URL(aud);
+        target.hostname = tag + '---' + target.hostname;
+        const check = await fetch(target, {
+          headers: { Authorization: 'Bearer ' + token.trim() },
+          redirect: 'error',
+          signal: AbortSignal.timeout(30_000),
+        });
+        console.log('Smoke HTTP ' + check.status);
+        if (check.status !== 200) {
+          throw Error('Smoke test failed');
+        }
 
 options:
   logging: CLOUD_LOGGING_ONLY

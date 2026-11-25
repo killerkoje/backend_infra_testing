@@ -83,5 +83,19 @@ steps:
           throw Error('Smoke test failed');
         }
 
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk:slim
+    id: promote
+    waitFor: ['check-id-token']
+    entrypoint: gcloud
+    args:
+      - run
+      - services
+      - update-traffic
+      - hello
+      - --to-tags=smoke-$SHORT_SHA=100
+      - --region=asia-northeast3
+      - --project=mineral-brand-515105-e3
+      - --quiet
+
 options:
   logging: CLOUD_LOGGING_ONLY

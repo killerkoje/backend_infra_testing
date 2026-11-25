@@ -39,5 +39,31 @@ steps:
       - --tag=smoke-$SHORT_SHA
       - --quiet
 
+  - name: node:22-alpine
+    id: check-id-token
+    entrypoint: node
+    args:
+      - --input-type=module
+      - -e
+      - |
+        const host = 'metadata.google.internal';
+        let path = '/computeMetadata/v1';
+        path += '/instance/service-accounts';
+        path += '/default/identity';
+        const url = new URL('http://' + host + path);
+        let aud = 'https://hello-2czua56gca-';
+        aud += 'du.a.run.app';
+        url.searchParams.set('audience', aud);
+        const headers = {
+          'Metadata-Flavor': 'Google',
+        };
+        const res = await fetch(url, { headers });
+        if (!res.ok) {
+          throw Error('Token HTTP ' + res.status);
+        }
+        const token = await res.text();
+        if (!token.trim()) throw Error('No token');
+        console.log('ID token OK');
+
 options:
   logging: CLOUD_LOGGING_ONLY

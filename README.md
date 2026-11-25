@@ -4,7 +4,7 @@ NestJS, PostgreSQL, Docker, Kubernetes를 직접 구성하고 장애 상황을 �
 
 ## 다음 학습 이어가기
 
-**[LEARNING-NEXT.md](./LEARNING-NEXT.md)를 먼저 읽는다.** 최근 Cloud Run 실습의 다음 단계와 기존 Mac·K3s용 GHCR·CI/CD 계획을 기록했다.
+**[LEARNING-NEXT.md](./LEARNING-NEXT.md)를 먼저 읽는다.** Cloud Run과 PostgreSQL 실습의 완료 지점, 기존 Mac·K3s용 GHCR·CI/CD 계획을 기록했다.
 
 ## 주제별 폴더
 
@@ -41,6 +41,8 @@ NestJS, PostgreSQL, Docker, Kubernetes를 직접 구성하고 장애 상황을 �
 - [새 이미지 배포와 롤백](./docs/learning-notes/infra/07-image-deploy-rollback.md)
 - [Mac·K3s 실습 전체 기록](./docs/learning-notes/infra/08-macos-k3s-lab.md)
 - [Cloud Run 배포·인증·트래픽 분할·오토스케일링](./docs/learning-notes/infra/09-cloud-run-lab.md)
+- [Cloud Run CI/CD·스모크 테스트·5xx 알림](./docs/learning-notes/infra/10-cloud-run-cicd-observability.md)
+- [PostgreSQL 백업·복원·시점 복구](./docs/learning-notes/database/03-postgres-backup-pitr.md)
 - [Mac 실행 환경](./LOCAL-SETUP.md) / [K3s 재현·시작·종료](./infra/local-server/README.md)
 
 ## 현재 학습 진도
@@ -61,7 +63,8 @@ Ingress / 외부 공개             Traefik 규칙·Cloudflare HTTPS 터널 검�
 새 이미지 / Rollback             v2 배포·이전 이미지 롤백·v2 복원 검증
 Cloud Build / Artifact Registry  이미지 푸시와 Cloud Run 자동 배포 검증
 Cloud Run                        인증 호출·요청 추적·리비전 분할·인스턴스 1 → 2 → 0 검증
-Backup / Observability          예정 (기본 로그·이벤트 조회 실습 완료)
+CI/CD / Observability           테스트 실패 차단·스모크 테스트·트래픽 전환·5xx 이메일 수신 검증
+PostgreSQL / Backup             별도 볼륨 복원·데이터 대조·WAL 시점 복구 검증
 ```
 
 ## 현재 프로젝트 실행 구조

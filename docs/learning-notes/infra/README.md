@@ -48,6 +48,10 @@
    - ID 토큰 인증 호출, 요청 ID 추적 및 리비전 트래픽 분할
    - 동시 요청에 따른 확장, Cloud Monitoring 조회, GPU 인스턴스 개념
 
+10. [Cloud Run CI/CD·스모크 테스트·5xx 알림](./10-cloud-run-cicd-observability.md)
+    - CI 실패 차단, 0% 배포, 스모크 테스트와 100% 전환
+    - 배포 후 요청 수·지연 시간, 5xx 이메일 알림 검증
+
 ## 다음 세션 시작점
 
 [최근 Cloud Run 실습과 GHCR → K3s 계획](../../../LEARNING-NEXT.md)을 확인한다.
@@ -69,7 +73,7 @@ Docker
 → 새 이미지 배포·롤백 완료
 → Cloud Build / Artifact Registry / Cloud Run 자동 배포 검증 완료
 → Cloud Run 리비전 분할·인스턴스 1 → 2 → 0 → 1 확인
-→ Cloud Build 배포 전 테스트   ← 다음 단계
-→ DB 백업·복구
-→ Observability / 장애 대응 심화
+→ Cloud Build 배포 전 테스트·배포 후 스모크 테스트·트래픽 자동 전환 확인
+→ Cloud Monitoring 요청 지표·5xx 이메일 알림 확인
+→ PostgreSQL 별도 볼륨 복원·WAL 시점 복구 확인
 ```

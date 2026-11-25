@@ -18,6 +18,7 @@
 
 - [DB 핵심 개념](./database/01-database-core.md)
 - [Transaction·Lock·Deadlock·Isolation](./database/02-transaction-lock-isolation.md)
+- [PostgreSQL 백업·복원·시점 복구](./database/03-postgres-backup-pitr.md)
 
 ### Software Design
 
@@ -40,3 +41,4 @@
 - [새 이미지 배포와 롤백](./infra/07-image-deploy-rollback.md)
 - [Mac·K3s 실습 전체 기록](./infra/08-macos-k3s-lab.md)
 - [Cloud Run 배포·인증·트래픽 분할·오토스케일링](./infra/09-cloud-run-lab.md)
+- [Cloud Run CI/CD·스모크 테스트·5xx 알림](./infra/10-cloud-run-cicd-observability.md)

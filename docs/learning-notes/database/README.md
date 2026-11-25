@@ -16,3 +16,7 @@ PostgreSQL Schema, 제약조건, Index, Migration, Transaction과 동시성 제�
    - Pessimistic·Optimistic Lock
    - Deadlock
    - Isolation Level
+
+3. [PostgreSQL 백업·복원과 시점 복구](./03-postgres-backup-pitr.md)
+   - Docker 볼륨·논리 덤프·복원 데이터 대조
+   - 기본 백업·WAL 보관·삭제 직전 복구

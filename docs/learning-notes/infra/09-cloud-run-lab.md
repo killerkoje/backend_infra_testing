@@ -101,6 +101,6 @@ gcloud builds list --region=global --limit=5
 - Compute Engine과 EC2는 각각 일반 VM과 GPU 장착 VM을 제공한다. GPU VM은 CPU·RAM과 GPU·VRAM을 한 인스턴스로 관리한다. Compute Engine의 `g2-standard-4`와 EC2의 `g6.xlarge`는 각각 vCPU 4개, RAM 16GiB, NVIDIA L4 1개를 제공한다. 일부 Compute Engine N1 VM에는 지원 GPU를 추가할 수 있다. [Compute Engine GPU 머신](https://docs.cloud.google.com/compute/docs/gpus/) · [EC2 가속 컴퓨팅](https://aws.amazon.com/ec2/instance-types/accelerated-computing/)
 - Cloud Run은 컨테이너 인스턴스에 GPU를 할당한다. GPU 1개 할당 인스턴스가 1 → 2로 늘면 모델을 실행하는 GPU 인스턴스도 두 개가 된다. 모델이 VRAM에 들어가는지와 한 GPU가 감당할 동시 요청 수를 기준으로 구성한다. 기본 확장은 CPU·동시 요청을 기준으로 동작한다. GPU 설정은 개념으로 학습했다. [Cloud Run GPU 설정](https://docs.cloud.google.com/run/docs/configuring/services/gpu) · [GPU 추론 운영](https://docs.cloud.google.com/run/docs/configuring/services/gpu-best-practices)
 
-## 다음 실습
+## 이어서 한 실습
 
-Cloud Build 테스트 단계가 실패하면 기존 리비전이 계속 서비스되는지 검증한다.
+[Cloud Run 배포 검증과 5xx 알림](./10-cloud-run-cicd-observability.md)에서 CI 실패 차단과 배포 후 검증을 다룬다.

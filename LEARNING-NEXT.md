@@ -10,9 +10,12 @@
 - [x] Cloud Monitoring 대시보드에서 테스트 리비전의 유휴 인스턴스도 0개로 줄어 전체 0개가 된 것을 확인.
 - [x] 인스턴스 0개 상태에서 새 요청을 보내 콜드 스타트와 HTTP 200 응답 확인.
 - [x] Cloud Build에서 HTTP 500 응답이 테스트를 실패시켜 이미지 빌드·푸시와 배포가 중단되는지 확인. 정상 소스로 재실행해 트래픽 0% 배포까지 성공.
-- [ ] 트래픽 0% 리비전의 태그 URL에서 배포 후 스모크 테스트를 실행하고, 통과한 리비전에만 기본 트래픽을 전환.
+- [x] 트래픽 0% 리비전에서 자동 스모크 테스트 성공 후 100% 전환. 기본 URL에서 HTTP 200과 새 리비전 확인.
+- [x] 요청 수와 지연 시간 확인. 테스트 리비전의 HTTP 500을 감지해 이메일 수신 및 테스트 태그 제거.
+- [x] PostgreSQL 덤프를 별도 DB와 새 볼륨에 복원하고, 네 테이블의 행 수와 데이터 체크섬 대조.
+- [x] 격리된 임시 PostgreSQL에서 기본 백업과 WAL로 삭제 직전까지 시점 복구.
 
-[Cloud Run 실습 기록과 PowerShell 조회 명령](docs/learning-notes/infra/09-cloud-run-lab.md)을 먼저 확인한다.
+[Cloud Run 기초](docs/learning-notes/infra/09-cloud-run-lab.md), [CI/CD·모니터링](docs/learning-notes/infra/10-cloud-run-cicd-observability.md), [PostgreSQL 백업·복구](docs/learning-notes/database/03-postgres-backup-pitr.md)를 복습한다. Terraform 실습은 이후로 보류했다.
 
 ## GHCR → K3s 계획 재개 지점
 
@@ -229,7 +232,7 @@ DB migration은 이미지 rollback으로 복구되지 않는다. 이 과정에�
 
 ### F1. 이후 학습
 
-- [ ] PostgreSQL 백업·별도 DB 복원으로 데이터 검증.
+- [x] 로컬 Compose PostgreSQL 백업·별도 DB 복원으로 데이터 검증.
 - [ ] 구조화 로그·메트릭·대시보드·알림.
 - [ ] 고정 도메인·접근 제어·별도 서버 배포가 필요하면 추가 설계.
 

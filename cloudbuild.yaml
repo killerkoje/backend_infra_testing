@@ -46,7 +46,7 @@ steps:
       - --input-type=module
       - -e
       - |
-        const host = 'metadata.google.internal';
+        const host = 'metadata';
         let path = '/computeMetadata/v1';
         path += '/instance/service-accounts';
         path += '/default/identity';

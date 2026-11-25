@@ -36,6 +36,7 @@ steps:
       - --region=asia-northeast3
       - --project=mineral-brand-515105-e3
       - --no-traffic
+      - --tag=smoke-$SHORT_SHA
       - --quiet
 
 options:

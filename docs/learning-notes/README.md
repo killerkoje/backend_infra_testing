@@ -2,7 +2,7 @@
 
 통합 학습 기록은 저장소 최상위 [`README.md`](../../README.md)에서 관리한다.
 
-다음 학습 재개: [GHCR·CI/CD 단계별 계획](../../LEARNING-NEXT.md).
+다음 학습은 [Cloud Run 체크포인트와 GHCR·K3s 계획](../../LEARNING-NEXT.md)에서 이어간다.
 
 ## 세부 문서
 
@@ -39,3 +39,4 @@
 - [Kubernetes 전체 숲: Mermaid 구조도](./infra/06-kubernetes-big-picture.md)
 - [새 이미지 배포와 롤백](./infra/07-image-deploy-rollback.md)
 - [Mac·K3s 실습 전체 기록](./infra/08-macos-k3s-lab.md)
+- [Cloud Run 배포·인증·트래픽 분할·오토스케일링](./infra/09-cloud-run-lab.md)

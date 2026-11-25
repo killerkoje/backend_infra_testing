@@ -4,7 +4,7 @@ NestJS, PostgreSQL, Docker, Kubernetes를 직접 구성하고 장애 상황을 �
 
 ## 다음 학습 이어가기
 
-**[LEARNING-NEXT.md](./LEARNING-NEXT.md)를 먼저 읽는다.** 현재 체크포인트, GHCR·CI/CD 단계별 계획, 완료 기준과 다음 명령을 정리했다. 다음 단계는 Mac에서 로컬 이미지 목록을 확인하는 R1이며, GHCR 업로드와 CI/CD는 아직 시작하지 않았다.
+**[LEARNING-NEXT.md](./LEARNING-NEXT.md)를 먼저 읽는다.** 최근 Cloud Run 실습의 다음 단계와 기존 Mac·K3s용 GHCR·CI/CD 계획을 기록했다.
 
 ## 주제별 폴더
 
@@ -40,6 +40,7 @@ NestJS, PostgreSQL, Docker, Kubernetes를 직접 구성하고 장애 상황을 �
 - [Kubernetes 전체 숲: Mermaid 구조도](./docs/learning-notes/infra/06-kubernetes-big-picture.md)
 - [새 이미지 배포와 롤백](./docs/learning-notes/infra/07-image-deploy-rollback.md)
 - [Mac·K3s 실습 전체 기록](./docs/learning-notes/infra/08-macos-k3s-lab.md)
+- [Cloud Run 배포·인증·트래픽 분할·오토스케일링](./docs/learning-notes/infra/09-cloud-run-lab.md)
 - [Mac 실행 환경](./LOCAL-SETUP.md) / [K3s 재현·시작·종료](./infra/local-server/README.md)
 
 ## 현재 학습 진도
@@ -58,7 +59,8 @@ DB 장애 / Probe                 Readiness 제외·재시작 없이 복구 확�
 HPA                            CPU 부하로 Pod 1 → 3 → 1 검증
 Ingress / 외부 공개             Traefik 규칙·Cloudflare HTTPS 터널 검증
 새 이미지 / Rollback             v2 배포·이전 이미지 롤백·v2 복원 검증
-Image Registry / CI/CD          다음 단계
+Cloud Build / Artifact Registry  이미지 푸시와 Cloud Run 자동 배포 검증
+Cloud Run                        인증 호출·요청 추적·리비전 분할·인스턴스 1 → 2 검증
 Backup / Observability          예정 (기본 로그·이벤트 조회 실습 완료)
 ```
 

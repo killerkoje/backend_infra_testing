@@ -43,9 +43,14 @@
    - Probe·DB 복구·PVC·Rolling Update·HPA
    - Ingress·Traefik·터널·로그·명령어 복습
 
+9. [Cloud Run 배포·인증·트래픽 분할·오토스케일링](./09-cloud-run-lab.md)
+   - Cloud Build와 Artifact Registry를 통한 자동 배포
+   - ID 토큰 인증 호출, 요청 ID 추적 및 리비전 트래픽 분할
+   - 동시 요청에 따른 확장, Cloud Monitoring 조회, GPU 인스턴스 개념
+
 ## 다음 세션 시작점
 
-[GHCR → CI → CD 세부 계획과 진행 기록](../../../LEARNING-NEXT.md)을 먼저 확인한다.
+[최근 Cloud Run 실습과 GHCR → K3s 계획](../../../LEARNING-NEXT.md)을 확인한다.
 각 단계는 직접 실행한 결과를 확인한 후 다음으로 진행한다.
 
 ## 현재 위치
@@ -62,7 +67,9 @@ Docker
 → Cloudflare HTTPS Tunnel 공개 완료
 → Pod 자동 복구·DB 장애 복구·HPA 1→3→1 검증 완료
 → 새 이미지 배포·롤백 완료
-→ Image Registry / CI/CD   ← 다음 단계
+→ Cloud Build / Artifact Registry / Cloud Run 자동 배포 검증 완료
+→ Cloud Run 리비전 분할·인스턴스 1 → 2 확인
+→ Cloud Run 인스턴스 0개 확인 및 배포 전 테스트   ← 다음 단계
 → DB 백업·복구
 → Observability / 장애 대응 심화
 ```

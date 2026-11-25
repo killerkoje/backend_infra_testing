@@ -35,6 +35,7 @@ steps:
       - --image=asia-northeast3-docker.pkg.dev/mineral-brand-515105-e3/backend-images/backend-infra-testing:$SHORT_SHA
       - --region=asia-northeast3
       - --project=mineral-brand-515105-e3
+      - --no-traffic
       - --quiet
 
 options:

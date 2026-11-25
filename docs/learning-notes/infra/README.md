@@ -68,8 +68,8 @@ Docker
 → Pod 자동 복구·DB 장애 복구·HPA 1→3→1 검증 완료
 → 새 이미지 배포·롤백 완료
 → Cloud Build / Artifact Registry / Cloud Run 자동 배포 검증 완료
-→ Cloud Run 리비전 분할·인스턴스 1 → 2 확인
-→ Cloud Run 인스턴스 0개 확인 및 배포 전 테스트   ← 다음 단계
+→ Cloud Run 리비전 분할·인스턴스 1 → 2 → 0 확인
+→ Cloud Run 0개 상태에서 새 요청 처리 및 배포 전 테스트   ← 다음 단계
 → DB 백업·복구
 → Observability / 장애 대응 심화
 ```

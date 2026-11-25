@@ -60,7 +60,7 @@ HPA                            CPU 부하로 Pod 1 → 3 → 1 검증
 Ingress / 외부 공개             Traefik 규칙·Cloudflare HTTPS 터널 검증
 새 이미지 / Rollback             v2 배포·이전 이미지 롤백·v2 복원 검증
 Cloud Build / Artifact Registry  이미지 푸시와 Cloud Run 자동 배포 검증
-Cloud Run                        인증 호출·요청 추적·리비전 분할·인스턴스 1 → 2 검증
+Cloud Run                        인증 호출·요청 추적·리비전 분할·인스턴스 1 → 2 → 0 검증
 Backup / Observability          예정 (기본 로그·이벤트 조회 실습 완료)
 ```
 

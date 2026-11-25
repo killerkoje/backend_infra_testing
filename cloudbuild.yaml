@@ -1,4 +1,9 @@
 steps:
+  - name: node:22-alpine
+    id: test
+    entrypoint: node
+    args: ['--test', 'demo/server.test.mjs']
+
   - name: docker
     args:
       - buildx

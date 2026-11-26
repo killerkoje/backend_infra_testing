@@ -1,6 +1,6 @@
 # 다음 학습 시작점
 
-최종 갱신 2026-11-25. 체크되지 않은 작업은 구현·실습 완료로 간주하지 않는다.
+최종 갱신 2026-11-26. 체크되지 않은 작업은 구현·실습 완료로 간주하지 않는다.
 
 ## 최근 실습과 다음 단계
 
@@ -15,7 +15,15 @@
 - [x] PostgreSQL 덤프를 별도 DB와 새 볼륨에 복원하고, 네 테이블의 행 수와 데이터 체크섬 대조.
 - [x] 격리된 임시 PostgreSQL에서 기본 백업과 WAL로 삭제 직전까지 시점 복구.
 
-[Cloud Run 기초](docs/learning-notes/infra/09-cloud-run-lab.md), [CI/CD·모니터링](docs/learning-notes/infra/10-cloud-run-cicd-observability.md), [PostgreSQL 백업·복구](docs/learning-notes/database/03-postgres-backup-pitr.md)를 복습한다. Terraform 실습은 이후로 보류했다.
+[Cloud Run 기초](docs/learning-notes/infra/09-cloud-run-lab.md), [CI/CD·모니터링](docs/learning-notes/infra/10-cloud-run-cicd-observability.md), [PostgreSQL 백업·복구](docs/learning-notes/database/03-postgres-backup-pitr.md)를 복습한다.
+
+## Terraform 학습 체크포인트
+
+- 기존 Cloud Run, Artifact Registry, Cloud Build 트리거, IAM, 5xx 알림을 [GCP Terraform 코드](infra/terraform/gcp/main.tf)에 옮겼다. 계획에서 가져오기 10개와 생성·수정·삭제 0개를 검증했다. 현재 실습은 계획 확인 단계까지 진행했다.
+- IaC와 HCL의 기본 문법, 프로바이더 버전, Terraform 입력값과 Cloud Run 환경변수의 차이를 공부했다.
+- Artifact Registry의 태그 가변성과 이미지 다이제스트를 살펴봤다. Cloud Run 롤백은 이전 리비전으로 트래픽을 돌리는 방식이다.
+- 5xx 알림 정책은 223줄까지 읽었다. 필터로 `hello`의 5xx 요청을 고르고, 60초 구간의 초당 발생 건수를 합산해 임계값 0과 비교한다. `trigger.count`는 기준을 넘은 시계열 개수다.
+- 다음 학습 지점은 225줄의 주석 아래에 있는 `import` 블록이다. `to`는 코드의 리소스 주소이고, `id`는 이미 만들어진 GCP 리소스를 찾는 데 쓰는 식별자다.
 
 ## GHCR → K3s 계획 재개 지점
 

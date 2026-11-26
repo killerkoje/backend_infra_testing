@@ -8,7 +8,7 @@ NestJS와 PostgreSQL로 학습용 API를 만들고, Docker·Kubernetes·Google C
 - **CI/CD와 모니터링** · Cloud Build에서 DB 없는 데모를 테스트하고 Artifact Registry에 이미지를 올린다. 새 리비전은 트래픽 0%로 배포하고, 인증 스모크 테스트가 HTTP 200을 받으면 트래픽을 100%로 전환한다. Cloud Monitoring으로 5xx 이메일 알림도 확인했다. [파이프라인 설정](cloudbuild.yaml) · [실습 기록](docs/learning-notes/infra/10-cloud-run-cicd-observability.md)
 - **PostgreSQL 복구** · 덤프를 새 볼륨에 복원해 데이터를 대조했다. 격리된 자동 실습에서는 기본 백업과 WAL로 삭제 직전까지 시점 복구를 검증했다. [백업·복구 기록](docs/learning-notes/database/03-postgres-backup-pitr.md)
 
-Terraform 실습은 시작 전이다. [학습 체크포인트](LEARNING-NEXT.md)
+- **Terraform** · 기존 GCP 설정을 코드로 옮겼다. 계획에서 기존 리소스 10개 가져오기와 생성·수정·삭제 0개를 확인했다. [GCP Terraform 코드](infra/terraform/gcp/main.tf) · [학습 체크포인트](LEARNING-NEXT.md)
 
 ## 로컬 API 실행
 

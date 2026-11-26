@@ -6,4 +6,5 @@ dist/
 /kubectl.exe
 /kubectl.exe.sha256
 /backend-image.tar
+/k8s/learning/secret.yaml
 
